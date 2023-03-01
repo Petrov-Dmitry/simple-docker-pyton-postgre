@@ -2,6 +2,19 @@ version: "3.9"
 
 services:
 
+  db:
+    container_name: as-db
+    image: library/postgres:latest
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: "artificial-sapiens"
+      POSTGRES_USER: "sapiens"
+      POSTGRES_PASSWORD: "sapiensCanComeUpPassword"
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
   app:
     container_name: as-app
     image: artificial-sapiens
@@ -18,3 +31,7 @@ services:
 networks:
   as:
     driver: bridge
+
+volumes:
+  pgdata:
+    driver: local
