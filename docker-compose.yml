@@ -1,10 +1,15 @@
 version: "3.9"
+
 services:
 
   app:
     container_name: as-app
     image: artificial-sapiens
+    build:
+      context: ./
     working_dir: /app
+    command: "python --version"
+#    restart: unless-stopped
     volumes:
       - ./:/app
     networks:
